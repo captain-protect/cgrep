@@ -1,0 +1,4 @@
+ Plans
+
+ BUG     Matches everything outputs 'Input lines: 19889251, output: 19520806
+ FEATURE Do one buffer copy

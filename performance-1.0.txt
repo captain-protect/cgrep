@@ -1,0 +1,36 @@
+COLUMN1 matches set of 99171 unique words
+[32,2MB/s][38,8MB/s][40,6MB/s][42,5MB/s][43,3MB/s][43,6MB/s][44,3MB/s][44,8MB/s][44,8MB/s][45,5MB/s][45,3MB/s][45,1MB/s][45,4MB/s][45,6MB/s][45,5MB/s][46,1MB/s][45,9MB/s][46,1MB/s][46,2MB/s][46,1MB/s][46,1MB/s][46,3MB/s][46,3MB/s]
+Input lines: 19889251, output: 773352
+TEST1
+COLUMN1 matches set of 1 unique words
+COLUMN2 matches set of 1 unique words
+COLUMN3 matches set of 1 unique words
+COLUMN4 matches set of 1 unique words
+COLUMN5 matches set of 1 unique words
+COLUMN6 matches set of 1 unique words
+[39,4MB/s][43,6MB/s][46,1MB/s][49,2MB/s][48,6MB/s][49,5MB/s][50,3MB/s][49,8MB/s]TEST2
+COLUMN1 matches set of 99171 unique words
+[32,9MB/s]TEST1
+COLUMN1 matches everything
+[39,6MB/s][39,5MB/s][42,3MB/s][  43MB/s][43,5MB/s][43,1MB/s][43,2MB/s][43,9MB/s][44,1MB/s][43,9MB/s][44,1MB/s][44,5MB/s][44,5MB/s][44,3MB/s][44,6MB/s][44,6MB/s][44,7MB/s][44,3MB/s][44,4MB/s][44,6MB/s][44,7MB/s][44,5MB/s][44,8MB/s]
+Input lines: 19889251, output: 19520806
+TEST2
+COLUMN1 matches set of 99171 unique words
+[  29MB/s][37,7MB/s][39,6MB/s][40,5MB/s][42,2MB/s][43,1MB/s][43,4MB/s][44,1MB/s][44,2MB/s][43,8MB/s][44,3MB/s][44,9MB/s][44,7MB/s][45,1MB/s][45,2MB/s][  45MB/s][45,1MB/s][45,2MB/s][45,1MB/s][  45MB/s][45,3MB/s][45,3MB/s][45,3MB/s]
+Input lines: 19889251, output: 773352
+TEST1
+./test.sh: line 29: pv: command not found
+COLUMN1 matches everything
+Input lines: 0, output: 0
+TEST2
+./test.sh: line 29: pv: command not found
+COLUMN1 matches set of 99171 unique words
+Input lines: 0, output: 0
+TEST1
+COLUMN1 matches everything
+[36,5MB/s][39,9MB/s][43,7MB/s][44,6MB/s][44,8MB/s][45,9MB/s][45,5MB/s][45,2MB/s][45,3MB/s][45,7MB/s][45,4MB/s][45,1MB/s][45,4MB/s][45,5MB/s][45,1MB/s][45,2MB/s][45,4MB/s][45,5MB/s][45,1MB/s][45,3MB/s][45,7MB/s][45,4MB/s][45,7MB/s]
+Input lines: 19889251, output: 19520806
+TEST2
+COLUMN1 matches set of 99171 unique words
+[35,4MB/s][39,9MB/s][42,5MB/s][44,9MB/s][  44MB/s][45,6MB/s][45,6MB/s][45,9MB/s][46,2MB/s][45,8MB/s][46,3MB/s][46,4MB/s][46,5MB/s][  47MB/s][46,6MB/s][47,1MB/s][  47MB/s][  47MB/s][47,2MB/s][  47MB/s][47,4MB/s][47,4MB/s]
+Input lines: 19889251, output: 773352
