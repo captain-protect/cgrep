@@ -64,7 +64,7 @@ public final class ChannelByteIO implements IO {
         }
     }
 
-    public static IO stdIO() {
+    public static ChannelByteIO stdIO() {
         FileInputStream input = new FileInputStream(FileDescriptor.in);
         FileOutputStream output = new FileOutputStream(FileDescriptor.out);
         FileChannel in = input.getChannel();
@@ -76,5 +76,14 @@ public final class ChannelByteIO implements IO {
     public void close() throws IOException {
         out.close();
         in.close();
+    }
+
+    public void copy() throws IOException {
+        if (in instanceof FileChannel) {
+            ((FileChannel)in).
+                    transferTo(0, Long.MAX_VALUE, out);
+        } else {
+            throw new UnsupportedOperationException("no copy implementation for " + in);
+        }
     }
 }
