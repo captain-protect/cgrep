@@ -16,19 +16,18 @@ public class Rnd {
         this.seed = (seed ^ multiplier) & mask;
     }
 
-    protected int next(int bits) {
-        long s = (seed * multiplier + addend) & mask;
-        seed = s;
-        return (int)(s >>> (48 - bits));
+    protected int next31() {
+        seed = (seed * multiplier + addend) & mask;
+        return (int)(seed >>> 17);
     }
 
     public int nextInt(int n) {
         if ((n & -n) == n)  // i.e., n is a power of 2
-            return (int)((n * (long)next(31)) >> 31);
+            return (int)((n * (long) next31()) >> 31);
 
         int bits, val;
         do {
-            bits = next(31);
+            bits = next31();
             val = bits % n;
         } while (bits - val + (n-1) < 0);
         return val;

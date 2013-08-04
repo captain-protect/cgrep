@@ -27,14 +27,14 @@ public final class ChannelByteIO implements IO {
 
     public int readByte() throws IOException {
         if (!inBuffer.hasRemaining()) {
-            if (!fillReadBuffer()) {
+            if (fillReadBufferAndIsEOF()) {
                 return -1;
             }
         }
         return inBuffer.get();
     }
 
-    private boolean fillReadBuffer() throws IOException {
+    private boolean fillReadBufferAndIsEOF() throws IOException {
         int res;
 
         inBuffer.clear();
@@ -43,12 +43,12 @@ public final class ChannelByteIO implements IO {
         } while (res == 0);
 
         if (res == -1) {
-            return false;
+            return true;
         }
 
         inBuffer.flip();
 
-        return true;
+        return false;
     }
 
     public void putByte(byte b) throws IOException {

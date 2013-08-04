@@ -25,8 +25,8 @@ public final class GrepBuffer {
         return grepBufPos < grepBuf.length;
     }
 
-    public boolean isEmpty() {
-        return grepBufPos == 0;
+    public boolean hasData() {
+        return grepBufPos != 0;
     }
 
     public void put(byte c) {

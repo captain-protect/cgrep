@@ -1,7 +1,5 @@
 package org.grep;
 
-import static junit.framework.Assert.*;
-
 import org.cgrep.CGrep;
 import org.cgrep.matchers.Matcher;
 import org.cgrep.matchers.Matchers;
@@ -9,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.nio.charset.Charset;
+
+import static junit.framework.Assert.assertEquals;
 
 /**
  * User: Oleksiy Pylypenko
@@ -21,12 +21,14 @@ public class CGrepTest {
     private Matcher abcUvwM;
     private Matcher nopXyzM;
     private Matcher ghiQrsM;
+    private Matcher anyM;
 
     @Before
     public void setUp() throws Exception {
         abcUvwM = Matchers.set(CHARSET, "abc", "uvw");
         nopXyzM = Matchers.set(CHARSET, "nop", "xyz");
         ghiQrsM = Matchers.set(CHARSET, "ghi", "qrs");
+        anyM = Matchers.everything();
     }
 
 
@@ -91,5 +93,21 @@ public class CGrepTest {
 
         String str = new String(io.toByteArray(), CHARSET_NAME);
         assertEquals(" uvw xyz\n", str);
+    }
+
+
+    @Test
+    public void testMultiMatches4() throws Exception {
+        TestIO io = TestIO.ofLines(Charset.forName(CHARSET_NAME),
+                "abc def ghi",
+                " klm nop qrs",
+                " uvw xyz");
+
+        CGrep tool = new CGrep(io, abcUvwM, anyM, ghiQrsM);
+
+        tool.scan();
+
+        String str = new String(io.toByteArray(), CHARSET_NAME);
+        assertEquals("abc def ghi\n", str);
     }
 }

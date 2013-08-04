@@ -5,7 +5,7 @@ import org.cgrep.delimiters.Delimiters;
 import org.cgrep.io.IO;
 import org.cgrep.matchers.Matcher;
 
-import java.io.*;
+import java.io.IOException;
 import java.nio.charset.Charset;
 
 /**
@@ -16,6 +16,7 @@ import java.nio.charset.Charset;
 public final class CGrep {
     public static final int DEFAULT_GREP_BUFFER_SIZE = 200 * 1024;
     public static final BasicDelimiters DEFAULT_DELIMITERS = new BasicDelimiters();
+    public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
     private final IO io;
     private final Matcher[] matchers;
@@ -29,9 +30,8 @@ public final class CGrep {
         this.matchers = matchers;
     }
 
-    public CGrep(IO io, Matcher... matchers) {
-        this(DEFAULT_DELIMITERS,
-                new GrepBuffer(DEFAULT_GREP_BUFFER_SIZE),
+    public CGrep(IO io, Matcher ...matchers) {
+        this(DEFAULT_DELIMITERS, new GrepBuffer(DEFAULT_GREP_BUFFER_SIZE),
                 io, matchers);
     }
 
@@ -71,7 +71,7 @@ public final class CGrep {
                 onNewLine();
             } else if (state == State.REST) {
                 // rest is defined whether to output or not
-                if (!rest()) {
+                if (restDataIsEOF()) {
                     break;
                 }
             } else if (!delimiters.isWhitespace(c)) {
@@ -89,7 +89,7 @@ public final class CGrep {
         }
     }
 
-    private boolean rest() throws IOException {
+    private boolean restDataIsEOF() throws IOException {
         if (output) {
             return restCopy();
         } else {
@@ -102,21 +102,21 @@ public final class CGrep {
         while ((c = io.readByte()) != -1) {
             if (delimiters.isNewLine(c)) {
                 onNewLine();
-                return true;
+                return false;
             }
             io.putByte((byte) c);
         }
-        return false;
+        return true;
     }
 
     private boolean restEmpty() throws IOException {
         while ((c = io.readByte()) != -1) {
             if (delimiters.isNewLine(c)) {
                 onNewLine();
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
 
@@ -166,7 +166,7 @@ public final class CGrep {
     }
 
     private boolean nextToken() throws IOException {
-        if (!buffer.isEmpty()) {
+        if (buffer.hasData()) {
             ByteString tokenStr = buffer.getMarkedToken();
 
             if (token < matchers.length) {
