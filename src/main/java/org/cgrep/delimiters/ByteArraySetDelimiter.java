@@ -21,7 +21,7 @@ public class ByteArraySetDelimiter implements Delimiters {
     }
 
     @Override
-    public boolean isWhitespace(int c) {
-        return whitespace.in((byte) c);
+    public boolean isNotWhitespace(int c) {
+        return !whitespace.in((byte) c);
     }
 }

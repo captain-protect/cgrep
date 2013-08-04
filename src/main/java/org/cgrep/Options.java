@@ -6,5 +6,5 @@ package org.cgrep;
  * Time: 12:53 PM
  */
 public class Options {
-    public static boolean verbose = true;
+    public static boolean verbose = false;
 }

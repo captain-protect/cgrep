@@ -8,5 +8,5 @@ package org.cgrep.delimiters;
 public interface Delimiters {
     boolean isNewLine(int c);
 
-    boolean isWhitespace(int c);
+    boolean isNotWhitespace(int c);
 }

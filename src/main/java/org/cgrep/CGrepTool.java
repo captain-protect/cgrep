@@ -22,8 +22,9 @@ import java.util.List;
  */
 public class CGrepTool {
 
-    private static void usage() {
+    private static void usage(String message) {
         System.out.println("Column grep tool");
+        System.out.println("Error: " + message);
         System.out.println("Usage: cgrep column1Matcher column2Matcher ... columnNMatcher");
         System.out.println(" columnKMatcher is applied to K-th column and could be:");
         System.out.println("  - string '" + Matchers.EVERYTHING_STR + "' to match everything");
@@ -33,13 +34,16 @@ public class CGrepTool {
 
     public static void main(String[] args) throws Exception {
         if (args.length == 0) {
-            usage();
+            usage("Specify at least one argument");
             System.exit(1);
 
         }
 
         Config cfg = new Config();
         cfg.parse(args);
+        if (cfg.matchers.length == 0) {
+            usage("Specify at least one matcher");
+        }
 
         GrepBuffer buffer = new GrepBuffer(cfg.grepBufSize);
         IO io = ChannelByteIO.stdIO();
@@ -70,12 +74,12 @@ public class CGrepTool {
         Matcher[] matchers;
 
         private void parse(String[] args) throws IOException {
-            int n = 0;
-
             List<String> matcherArgs = new ArrayList<String>(args.length);
             for (String arg : args) {
                 arg = arg.trim();
-                if (arg.startsWith("-d")) {
+                if (arg.startsWith("-v")) {
+                    Options.verbose = true;
+                } else if (arg.startsWith("-d")) {
                     nlDelimitersArg(arg);
                 } else if (arg.startsWith("-d")) {
                     delimitersArg(arg);
@@ -135,10 +139,11 @@ public class CGrepTool {
 
             int i = 0;
             for (String arg : matcherArgs) {
-                matchers[i++] = Matchers.fromExpression(charset, arg);
+                matchers[i] = Matchers.fromExpression(charset, arg);
                 if (Options.verbose) {
                     System.err.println("COLUMN" + (i+1) + " matches " + matchers[i]);
                 }
+                i++;
             }
 
             this.matchers = matchers;

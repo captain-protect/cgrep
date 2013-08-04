@@ -10,10 +10,10 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 
 public final class ChannelByteIO implements IO {
-    public final ReadableByteChannel in;
-    public final WritableByteChannel out;
-    public final ByteBuffer inBuffer;
-    public final ByteBuffer outBuffer;
+    private final ReadableByteChannel in;
+    private final WritableByteChannel out;
+    private final ByteBuffer inBuffer;
+    private final ByteBuffer outBuffer;
 
     public ChannelByteIO(ReadableByteChannel in, WritableByteChannel out) {
         this.in = in;

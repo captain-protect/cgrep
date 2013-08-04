@@ -5,7 +5,6 @@ import org.cgrep.util.Utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +17,7 @@ import java.util.Set;
 public class Matchers {
     private static final MatchEverything MATCH_EVERYTHING = new MatchEverything();
 
-    public static final String EVERYTHING_STR = "!EVERYTHING!";
+    public static final String EVERYTHING_STR = "-";
     public static final String FILE_PREFIX = "-f";
 
     public static Matcher fromExpression(Charset charset, String expr) throws IOException {
@@ -40,8 +39,7 @@ public class Matchers {
     }
 
 
-    public static SetMatcher set(Charset charset, String ...lines)
-            throws UnsupportedEncodingException {
+    public static SetMatcher set(Charset charset, String ...lines) {
         Set<ByteString> set = new HashSet<ByteString>(lines.length);
         for (String line : lines) {
             set.add(new ByteString(line, charset));
@@ -49,6 +47,7 @@ public class Matchers {
         return new SetMatcher(set);
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public static SetMatcher set(Charset charset, File file)
             throws IOException {
         HashSetMatcherBuilder builder = new HashSetMatcherBuilder(charset);

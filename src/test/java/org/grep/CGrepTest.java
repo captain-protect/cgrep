@@ -16,8 +16,7 @@ import static junit.framework.Assert.assertEquals;
  * Time: 8:06 AM
  */
 public class CGrepTest {
-    public static final String CHARSET_NAME = "UTF-8";
-    public static final Charset CHARSET = Charset.forName(CHARSET_NAME);
+    private static final Charset CHARSET = Charset.forName("UTF-8");
     private Matcher abcUvwM;
     private Matcher nopXyzM;
     private Matcher ghiQrsM;
@@ -43,13 +42,13 @@ public class CGrepTest {
 
         tool.scan();
 
-        String str = new String(io.toByteArray(), CHARSET_NAME);
+        String str = new String(io.toByteArray(), "UTF-8");
         assertEquals("abc def ghi\nuvw xyz\n", str);
     }
 
     @Test
     public void testMatches2() throws Exception {
-        TestIO io = TestIO.ofLines(Charset.forName(CHARSET_NAME),
+        TestIO io = TestIO.ofLines(Charset.forName("UTF-8"),
                 "abc def ghi",
                 "klm nop qrs",
                 "uvw xyz",
@@ -61,13 +60,13 @@ public class CGrepTest {
 
         tool.scan();
 
-        String str = new String(io.toByteArray(), CHARSET_NAME);
+        String str = new String(io.toByteArray(), "UTF-8");
         assertEquals("abc def ghi\nuvw xyz\nabc end\n", str);
     }
 
     @Test
     public void testMatches3() throws Exception {
-        TestIO io = TestIO.ofLines(Charset.forName(CHARSET_NAME),
+        TestIO io = TestIO.ofLines(Charset.forName("UTF-8"),
                 "abc def ghi",
                 " klm nop qrs",
                 " uvw xyz");
@@ -76,13 +75,13 @@ public class CGrepTest {
 
         tool.scan();
 
-        String str = new String(io.toByteArray(), CHARSET_NAME);
+        String str = new String(io.toByteArray(), "UTF-8");
         assertEquals("abc def ghi\n uvw xyz\n", str);
     }
 
     @Test
     public void testMultiMatches3() throws Exception {
-        TestIO io = TestIO.ofLines(Charset.forName(CHARSET_NAME),
+        TestIO io = TestIO.ofLines(Charset.forName("UTF-8"),
                 "abc def ghi",
                 " klm nop qrs",
                 " uvw xyz");
@@ -91,14 +90,14 @@ public class CGrepTest {
 
         tool.scan();
 
-        String str = new String(io.toByteArray(), CHARSET_NAME);
+        String str = new String(io.toByteArray(), "UTF-8");
         assertEquals(" uvw xyz\n", str);
     }
 
 
     @Test
     public void testMultiMatches4() throws Exception {
-        TestIO io = TestIO.ofLines(Charset.forName(CHARSET_NAME),
+        TestIO io = TestIO.ofLines(Charset.forName("UTF-8"),
                 "abc def ghi",
                 " klm nop qrs",
                 " uvw xyz");
@@ -107,7 +106,7 @@ public class CGrepTest {
 
         tool.scan();
 
-        String str = new String(io.toByteArray(), CHARSET_NAME);
+        String str = new String(io.toByteArray(), "UTF-8");
         assertEquals("abc def ghi\n", str);
     }
 }

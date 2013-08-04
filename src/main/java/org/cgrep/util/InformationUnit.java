@@ -10,10 +10,10 @@ public class InformationUnit {
 
     public InformationUnit(final String text) {
         class Matcher {
-            String txt = text.trim().toLowerCase();
-            long val;
+            final String txt = text.trim().toLowerCase();
+            long value;
             boolean matched = false;
-            void check(String suf, long mult) {
+            void check(String suf, long multiplier) {
                 if (matched) {
                     return;
                 }
@@ -21,7 +21,7 @@ public class InformationUnit {
                     String numPart = txt.substring(0, txt.length() - suf.length()).trim();
                     if (numPart.matches("[0-9]+")) {
                         long num = Long.parseLong(numPart.trim());
-                        val = num * mult;
+                        value = num * multiplier;
                         matched = true;
                     }
                 }
@@ -54,7 +54,7 @@ public class InformationUnit {
             throw new IllegalArgumentException("bad information unit: '" + text + "'");
         }
 
-        bytes = m.val;
+        bytes = m.value;
     }
 
     public long toBytes() {

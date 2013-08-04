@@ -16,7 +16,7 @@ public class Rnd {
         this.seed = (seed ^ multiplier) & mask;
     }
 
-    protected int next31() {
+    private int next31() {
         seed = (seed * multiplier + addend) & mask;
         return (int)(seed >>> 17);
     }

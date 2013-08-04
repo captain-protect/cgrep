@@ -12,6 +12,7 @@ import java.nio.channels.WritableByteChannel;
  * Time: 12:12 PM
  */
 public class RandomBytesTool {
+    public static final String ABC = " \nabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private final WritableByteChannel out;
     private final long maxLen;
     private Rnd random;
@@ -44,7 +45,7 @@ public class RandomBytesTool {
 
     private void generate() throws IOException {
         byte []buf = new byte[20 * 1024 * 1024];
-        byte []abc = " \nabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".getBytes("utf-8");
+        byte []abc = ABC.getBytes("utf-8");
         long outB = 0;
         while (!Thread.interrupted() && outB < maxLen) {
             int need = (int) Math.min(maxLen - outB, buf.length);

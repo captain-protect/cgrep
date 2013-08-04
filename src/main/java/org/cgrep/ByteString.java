@@ -20,7 +20,7 @@ public final class ByteString {
         this.len = len;
     }
 
-    public ByteString(String str, Charset charset) throws UnsupportedEncodingException {
+    public ByteString(String str, Charset charset) {
         byte []arr = str.getBytes(charset);
         off = 0;
         bytes = arr;
@@ -62,6 +62,7 @@ public final class ByteString {
         return result ^ len;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     public int length() {
         return len;
     }

@@ -4,7 +4,6 @@ import org.cgrep.io.IO;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 /**
@@ -15,14 +14,13 @@ import java.nio.charset.Charset;
 class TestIO implements IO {
     private int inPos;
     private final byte[] inBuf;
-    private ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
     TestIO(byte[] inBuf) {
         this.inBuf = inBuf;
     }
 
-    public static TestIO ofLines(Charset charset, String... lines)
-            throws UnsupportedEncodingException {
+    public static TestIO ofLines(Charset charset, String... lines) {
         StringBuilder sb = new StringBuilder();
         for (String line : lines) {
             sb.append(line);

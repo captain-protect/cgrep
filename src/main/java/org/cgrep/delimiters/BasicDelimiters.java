@@ -10,7 +10,7 @@ public final class BasicDelimiters implements Delimiters {
     }
 
     @Override
-    public boolean isWhitespace(int c) {
-        return c == ' ' || c == '\t';
+    public boolean isNotWhitespace(int c) {
+        return !(c == ' ' || c == '\t');
     }
 }

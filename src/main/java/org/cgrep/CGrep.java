@@ -74,7 +74,7 @@ public final class CGrep {
                 if (restDataIsEOF()) {
                     break;
                 }
-            } else if (!delimiters.isWhitespace(c)) {
+            } else if (delimiters.isNotWhitespace(c)) {
                 // WHITESPACE -> TOKEN
                 processChar();
                 outBuf();
@@ -171,14 +171,15 @@ public final class CGrep {
 
             if (token < matchers.length) {
                 Matcher matcher = matchers[token];
-                if (!matcher.matches(tokenStr)) {
+                if (matcher.matches(tokenStr)) {
+                    if (token == matchers.length - 1) {
+                        output = true;
+                    }
+                    token++;
+                } else {
                     buffer.clear();
                     return false;
                 }
-                if (token == matchers.length - 1) {
-                    output = true;
-                }
-                token++;
             }
             if (output) {
                 flushBuf();
