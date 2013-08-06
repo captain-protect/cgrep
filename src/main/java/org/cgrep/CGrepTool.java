@@ -77,7 +77,7 @@ public class CGrepTool {
             List<String> matcherArgs = new ArrayList<String>(args.length);
             for (String arg : args) {
                 arg = arg.trim();
-                if (arg.startsWith("-v")) {
+                if (arg.equals("-v")) {
                     Options.verbose = true;
                 } else if (arg.startsWith("-d")) {
                     nlDelimitersArg(arg);

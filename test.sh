@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mvn -q package
+mvn -q clean package
 if [ "$?" -ne "0" ]; then
    echo "Build failed!"
    exit 1
